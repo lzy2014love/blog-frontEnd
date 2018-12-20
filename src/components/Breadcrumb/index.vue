@@ -1,14 +1,28 @@
 <template>
-  <el-breadcrumb class="app-breadcrumb" separator="/">
-    <transition-group name="breadcrumb">
-      <el-breadcrumb-item v-for="(item, index) in levelList" v-if="item.meta.title" :key="item.path">
-        <span v-if="item.redirect === 'noredirect' || index == levelList.length - 1" class="no-redirect">{{
-          item.meta.title
-        }}</span>
-        <a v-else @click.prevent="handleLink(item)">{{ item.meta.title }}</a>
-      </el-breadcrumb-item>
-    </transition-group>
-  </el-breadcrumb>
+  <ElBreadcrumb
+    class="app-breadcrumb"
+    separator="/">
+    <TransitionGroup name="breadcrumb">
+      <ElBreadcrumbItem
+        v-for="(item, index) in levelList"
+        :key="item.path">
+        <template v-if="item.meta.title">
+          <span
+            v-if="item.redirect === 'noredirect' || index == levelList.length - 1"
+            class="no-redirect">
+            {{
+              item.meta.title
+            }}
+          </span>
+          <a
+            v-else
+            @click.prevent="handleLink(item)">
+            {{ item.meta.title }}
+          </a>
+        </template>
+      </ElBreadcrumbItem>
+    </TransitionGroup>
+  </ElBreadcrumb>
 </template>
 
 <script>
@@ -34,6 +48,7 @@ export default {
         if (item.name) {
           return true
         }
+        return false
       })
       const first = matched[0]
       if (first && first.name !== 'dashboard') {
@@ -44,7 +59,7 @@ export default {
     pathCompile(path) {
       // To solve this problem https://github.com/PanJiaChen/vue-element-admin/issues/561
       const { params } = this.$route
-      var toPath = pathToRegexp.compile(path)
+      const toPath = pathToRegexp.compile(path)
       return toPath(params)
     },
     handleLink(item) {

@@ -1,5 +1,9 @@
 <template>
-  <svg :class="svgClass" aria-hidden="true"><use :xlink:href="iconName" /></svg>
+  <svg
+    :class="svgClass"
+    aria-hidden="true">
+    <use :xlink:href="iconName" />
+  </svg>
 </template>
 
 <script>
@@ -21,10 +25,9 @@ export default {
     },
     svgClass() {
       if (this.className) {
-        return 'svg-icon ' + this.className
-      } else {
-        return 'svg-icon'
+        return `svg-icon ${this.className}`
       }
+      return 'svg-icon'
     },
   },
 }

@@ -9,7 +9,6 @@ const url = 'http://localhost:7001'
 
 module.exports = {
   devServer: {
-    // open: process.platform === 'darwin',
     open: true,
     host: '0.0.0.0',
     port: 1234,
@@ -29,6 +28,7 @@ module.exports = {
     },
   },
   lintOnSave: true,
+  productionSourceMap: false,
   chainWebpack: config => {
     config.resolve.alias.set('@', resolve('src'))
 

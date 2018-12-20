@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { Message, MessageBox } from 'element-ui'
 import store from '../store'
-import { getToken } from '@/utils/auth'
+import { getToken } from './auth'
 
 // 创建axios实例
 const service = axios.create({
@@ -20,7 +20,8 @@ service.interceptors.request.use(
   },
   error => {
     // Do something with request error
-    console.log(error) // for debug
+    // eslint-disable-next-line no-console
+    console.log(`request error:${error}`) // for debug
     Promise.reject(error)
   },
 )
@@ -51,13 +52,14 @@ service.interceptors.response.use(
           })
         })
       }
-      return Promise.reject('error')
-    } else {
-      return response.data
+      // eslint-disable-next-line prefer-promise-reject-errors
+      return Promise.reject('response error')
     }
+    return response.data
   },
   error => {
-    console.log('err' + error) // for debug
+    // eslint-disable-next-line no-console
+    console.log(`response error:${error}`) // for debug
     Message({
       message: error.message,
       type: 'error',

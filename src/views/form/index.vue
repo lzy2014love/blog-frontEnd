@@ -1,43 +1,86 @@
 <template>
   <div class="app-container">
-    <el-form ref="form" :model="form" label-width="120px">
-      <el-form-item label="Activity name"> <el-input v-model="form.name" /> </el-form-item>
-      <el-form-item label="Activity zone">
-        <el-select v-model="form.region" placeholder="please select your zone">
-          <el-option label="Zone one" value="shanghai" />
-          <el-option label="Zone two" value="beijing" />
-        </el-select>
-      </el-form-item>
-      <el-form-item label="Activity time">
-        <el-col :span="11">
-          <el-date-picker v-model="form.date1" type="date" placeholder="Pick a date" style="width: 100%;" />
-        </el-col>
-        <el-col :span="2" class="line">-</el-col>
-        <el-col :span="11">
-          <el-time-picker v-model="form.date2" type="fixed-time" placeholder="Pick a time" style="width: 100%;" />
-        </el-col>
-      </el-form-item>
-      <el-form-item label="Instant delivery"> <el-switch v-model="form.delivery" /> </el-form-item>
-      <el-form-item label="Activity type">
-        <el-checkbox-group v-model="form.type">
-          <el-checkbox label="Online activities" name="type" />
-          <el-checkbox label="Promotion activities" name="type" />
-          <el-checkbox label="Offline activities" name="type" />
-          <el-checkbox label="Simple brand exposure" name="type" />
-        </el-checkbox-group>
-      </el-form-item>
-      <el-form-item label="Resources">
-        <el-radio-group v-model="form.resource">
-          <el-radio label="Sponsor" />
-          <el-radio label="Venue" />
-        </el-radio-group>
-      </el-form-item>
-      <el-form-item label="Activity form"> <el-input v-model="form.desc" type="textarea" /> </el-form-item>
-      <el-form-item>
-        <el-button type="primary" @click="onSubmit">Create</el-button>
-        <el-button @click="onCancel">Cancel</el-button>
-      </el-form-item>
-    </el-form>
+    <ElForm
+      ref="form"
+      :model="form"
+      label-width="120px">
+      <ElFormItem label="Activity name">
+        <ElInput v-model="form.name" />
+      </ElFormItem>
+      <ElFormItem label="Activity zone">
+        <ElSelect
+          v-model="form.region"
+          placeholder="please select your zone">
+          <ElOption
+            label="Zone one"
+            value="shanghai" />
+          <ElOption
+            label="Zone two"
+            value="beijing" />
+        </ElSelect>
+      </ElFormItem>
+      <ElFormItem label="Activity time">
+        <ElCol :span="11">
+          <ElDatePicker
+            v-model="form.date1"
+            type="date"
+            placeholder="Pick a date"
+            style="width: 100%;" />
+        </ElCol>
+        <ElCol
+          :span="2"
+          class="line">
+          -
+        </ElCol>
+        <ElCol :span="11">
+          <ElTimePicker
+            v-model="form.date2"
+            type="fixed-time"
+            placeholder="Pick a time"
+            style="width: 100%;" />
+        </ElCol>
+      </ElFormItem>
+      <ElFormItem label="Instant delivery">
+        <ElSwitch v-model="form.delivery" />
+      </ElFormItem>
+      <ElFormItem label="Activity type">
+        <ElCheckboxGroup v-model="form.type">
+          <ElCheckbox
+            label="Online activities"
+            name="type" />
+          <ElCheckbox
+            label="Promotion activities"
+            name="type" />
+          <ElCheckbox
+            label="Offline activities"
+            name="type" />
+          <ElCheckbox
+            label="Simple brand exposure"
+            name="type" />
+        </ElCheckboxGroup>
+      </ElFormItem>
+      <ElFormItem label="Resources">
+        <ElRadioGroup v-model="form.resource">
+          <ElRadio label="Sponsor" />
+          <ElRadio label="Venue" />
+        </ElRadioGroup>
+      </ElFormItem>
+      <ElFormItem label="Activity form">
+        <ElInput
+          v-model="form.desc"
+          type="textarea" />
+      </ElFormItem>
+      <ElFormItem>
+        <ElButton
+          type="primary"
+          @click="onSubmit">
+          Create
+        </ElButton>
+        <ElButton @click="onCancel">
+          Cancel
+        </ElButton>
+      </ElFormItem>
+    </ElForm>
   </div>
 </template>
 

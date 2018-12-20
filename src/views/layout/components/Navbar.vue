@@ -1,22 +1,43 @@
 <template>
-  <el-menu class="navbar" mode="horizontal">
-    <hamburger :toggle-click="toggleSideBar" :is-active="sidebar.opened" class="hamburger-container" /> <breadcrumb />
-    <el-dropdown class="avatar-container" trigger="click">
+  <ElMenu
+    class="navbar"
+    mode="horizontal">
+    <Hamburger
+      :toggle-click="toggleSideBar"
+      :is-active="sidebar.opened"
+      class="hamburger-container" /> <Breadcrumb />
+    <ElDropdown
+      class="avatar-container"
+      trigger="click">
       <div class="avatar-wrapper">
-        <img :src="avatar + '?imageView2/1/w/80/h/80'" class="user-avatar" /> <i class="el-icon-caret-bottom" />
+        <img
+          :src="avatar + '?imageView2/1/w/80/h/80'"
+          class="user-avatar"> <i class="el-icon-caret-bottom" />
       </div>
-      <el-dropdown-menu slot="dropdown" class="user-dropdown">
-        <router-link class="inlineBlock" to="/"> <el-dropdown-item> Home </el-dropdown-item> </router-link>
-        <el-dropdown-item divided> <span style="display:block;" @click="logout">LogOut</span> </el-dropdown-item>
-      </el-dropdown-menu>
-    </el-dropdown>
-  </el-menu>
+      <ElDropdownMenu
+        slot="dropdown"
+        class="user-dropdown">
+        <RouterLink
+          class="inlineBlock"
+          to="/">
+          <ElDropdownItem> Home </ElDropdownItem>
+        </RouterLink>
+        <ElDropdownItem divided>
+          <span
+            style="display:block;"
+            @click="logout">
+            LogOut
+          </span>
+        </ElDropdownItem>
+      </ElDropdownMenu>
+    </ElDropdown>
+  </ElMenu>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
-import Breadcrumb from '@/components/Breadcrumb'
-import Hamburger from '@/components/Hamburger'
+import Breadcrumb from '@/components/Breadcrumb/index.vue'
+import Hamburger from '@/components/Hamburger/index.vue'
 
 export default {
   components: {
