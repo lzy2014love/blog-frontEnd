@@ -17,8 +17,12 @@ import '@/permission' // permission control
 
 Vue.use(ElementUI, { locale })
 
-Vue.config.productionTip = false
-
+if (process.env.NODE_ENV === 'production') {
+  Vue.config.productionTip = false
+}
+console.log('====================================')
+console.log(process.env.NODE_ENV)
+console.log('====================================')
 // eslint-disable-next-line no-new
 new Vue({
   el: '#app',
