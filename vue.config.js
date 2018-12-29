@@ -36,12 +36,24 @@ module.exports = {
       },
     },
   },
-  // eslint报错停止编译
-  // lintOnSave: 'error',
-  productionSourceMap: !isProduction,
+  // css相关配置
+  css: {
+    // 开启 CSS source maps?
+    sourceMap: false,
+    // css预设器配置项
+    loaderOptions: {},
+    // 启用 CSS modules for all css / pre-processor files.
+    modules: false,
+  },
+  // 如果机器有超过1个核心，则默认情况下启用生产构建中的babel和TS的线程加载器
+  parallel: require('os').cpus().length > 1,
+  // lintOnSave: 'error', // eslint报错停止编译
+  productionSourceMap: !isProduction, // 生产环境是否生成 sourceMap 文件
   configureWebpack: () => {
+    let config
     if (isProduction) {
-      return {
+      // 生产环境配置
+      config = {
         optimization: {
           runtimeChunk: 'single',
           splitChunks: {
@@ -103,8 +115,13 @@ module.exports = {
         ],
         devtool: false,
       }
+    } else {
+      // 开发环境配置
+      config = {}
     }
-    return {}
+    // 开发生产共同配置
+    Object.assign(config, {})
+    return config
   },
   chainWebpack: config => {
     // 设置别名
