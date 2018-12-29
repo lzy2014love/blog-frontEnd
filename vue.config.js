@@ -1,6 +1,10 @@
 /* eslint-disable no-console */
 const path = require('path')
+const TerserPlugin = require('terser-webpack-plugin') // 支持压缩es6
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+const CompressionWebpackPlugin = require('compression-webpack-plugin')
 
+const isProduction = process.env.NODE_ENV === 'production'
 function resolve(dir) {
   return path.join(__dirname, dir)
 }
@@ -9,7 +13,7 @@ function resolve(dir) {
 const url = 'http://localhost:7001'
 
 console.log('====================================')
-console.log(process.env.NODE_ENV)
+console.log(process.env.NODE_ENV, process.argv)
 console.log('====================================')
 module.exports = {
   baseUrl: '/',
@@ -33,8 +37,75 @@ module.exports = {
     },
   },
   // eslint报错停止编译
-  lintOnSave: 'error',
-  productionSourceMap: !(process.env.NODE_ENV === 'production'),
+  // lintOnSave: 'error',
+  productionSourceMap: !isProduction,
+  configureWebpack: () => {
+    if (isProduction) {
+      return {
+        optimization: {
+          runtimeChunk: 'single',
+          splitChunks: {
+            chunks: 'all',
+            cacheGroups: {
+              libs: {
+                name: 'chunk-libs',
+                test: /[\\/]node_modules[\\/]/,
+                priority: 10,
+                chunks: 'initial', // 只打包初始时依赖的第三方
+              },
+              elementUI: {
+                name: 'chunk-elementUI', // 单独将 elementUI 拆包
+                priority: 20, // 权重要大于 libs 和 app 不然会被打包进 libs 或者 app
+                test: /[\\/]node_modules[\\/]element-ui[\\/]/,
+              },
+            },
+          },
+          minimizer: [
+            new TerserPlugin({
+              parallel: true, // 并行压缩
+              cache: true, // 缓存
+              terserOptions: {
+                warnings: false,
+                ie8: false,
+                ecma: 6,
+                mangle: true,
+                output: {
+                  comments: false,
+                  beautify: false,
+                },
+                compress: {
+                  warnings: false, // 删除没有用到的代码时不输出警告
+                  drop_console: true, // 移除console
+                  drop_debugger: true,
+                  pure_funcs: ['console.log'],
+                  // 提取出出现多次但是没有定义成变量去引用的静态值
+                  reduce_vars: true,
+                },
+              },
+            }),
+            // 压缩提取的CSS,删除来自不同组件重复的css
+            new OptimizeCSSAssetsPlugin({
+              cssProcessorOptions: {
+                safe: true,
+              },
+            }),
+          ],
+        },
+        plugins: [
+          new CompressionWebpackPlugin({
+            filename: '[path].gz[query]',
+            algorithm: 'gzip',
+            test: /\.(js|jsx|css)$/i,
+            threshold: 8192,
+            minRatio: 0.8,
+            deleteOriginalAssets: true, // 是否删除原始文件。
+          }),
+        ],
+        devtool: false,
+      }
+    }
+    return {}
+  },
   chainWebpack: config => {
     // 设置别名
     config.resolve.alias.set('@', resolve('src'))

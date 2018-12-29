@@ -1,3 +1,5 @@
+const isProduction = process.env.NODE_ENV === 'production'
+
 module.exports = {
   root: true,
   env: {
@@ -8,8 +10,8 @@ module.exports = {
   },
   extends: ['plugin:vue/strongly-recommended', '@vue/airbnb'],
   rules: {
-    'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'warn',
-    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'warn',
+    'no-console': 'off',
+    'no-debugger': isProduction ? 'error' : 'off',
     'arrow-parens': ['error', 'as-needed'],
     'func-names': ['error', 'as-needed'],
     'global-require': 'off',
@@ -35,7 +37,7 @@ module.exports = {
       'error',
       'always',
       {
-        ignore: ['DTO'],
+        ignore: ['DTO', 'VO'],
       },
     ],
 

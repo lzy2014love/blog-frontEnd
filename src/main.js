@@ -17,6 +17,7 @@ import '@/permission' // permission control
 
 Vue.use(ElementUI, { locale })
 
+// 生产环境关闭devtool
 if (process.env.NODE_ENV === 'production') {
   Vue.config.productionTip = false
 }
