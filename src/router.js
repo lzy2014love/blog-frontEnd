@@ -3,7 +3,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 /* Layout */
-import Layout from '../views/layout/Layout.vue'
+import Layout from '@/views/layout/Layout.vue'
 
 // in development-env not use lazy-loading,
 // because lazy-loading too many pages will cause webpack hot update too slow.

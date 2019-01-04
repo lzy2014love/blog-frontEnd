@@ -59,7 +59,7 @@ service.interceptors.response.use(
   },
   error => {
     // eslint-disable-next-line no-console
-    console.log(`response error:${error}`) // for debug
+    console.log(`response error:${error}`)
     Message({
       message: error.message,
       type: 'error',
