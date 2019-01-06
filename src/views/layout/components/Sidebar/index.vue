@@ -18,6 +18,7 @@
 </template>
 
 <script>
+// eslint-disable-next-line import/extensions
 import { mapGetters } from 'vuex'
 import SidebarItem from './SidebarItem.vue'
 

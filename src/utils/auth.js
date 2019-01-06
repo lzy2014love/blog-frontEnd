@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/extensions
 import Cookies from 'js-cookie'
 
 const TokenKey = 'Admin-Token'

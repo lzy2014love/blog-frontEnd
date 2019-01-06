@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/extensions
 import Vue from 'vue'
 import SvgIcon from '@/components/SvgIcon/index.vue' // svg组件
 

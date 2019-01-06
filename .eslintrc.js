@@ -8,6 +8,9 @@ module.exports = {
     es6: true,
     mocha: true,
   },
+  globals: {
+    // Vue: false,
+  },
   extends: ['plugin:vue/strongly-recommended', '@vue/airbnb'],
   rules: {
     'no-console': 'off',
@@ -18,13 +21,6 @@ module.exports = {
     'no-unused-expressions': ['error', { allowShortCircuit: true }],
     'no-restricted-globals': ['error', 'event'],
     'no-extend-native': ['error'],
-    'import/extensions': [
-      'error',
-      'always',
-      {
-        js: 'never',
-      },
-    ],
     'no-param-reassign': ['error', { props: false }],
     'vue/html-closing-bracket-newline': [
       'error',
@@ -40,9 +36,17 @@ module.exports = {
         ignore: ['DTO', 'VO'],
       },
     ],
-
-    // 'import/no-unresolved': ['error', { ignore: ['\.vue$'] }],
-    // 'linebreak-style': ['off'],
+    'import/extensions': [
+      'error',
+      'always',
+      {
+        js: 'never',
+      },
+    ],
+    'import/no-unresolved': [
+      'error',
+      { ignore: ['vue', 'vue-router', 'vuex', 'element-ui', 'axios', 'js-cookie', 'nprogress'] },
+    ],
     'linebreak-style': ['error', 'unix'],
     semi: ['error', 'never'],
   },

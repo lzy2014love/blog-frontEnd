@@ -1,6 +1,6 @@
 /build/
 /config/
 /dist/
-/static/
+/public/
 node_modules/**
 .vscode/**

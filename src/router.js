@@ -1,5 +1,7 @@
 /* eslint-disable max-len */
+// eslint-disable-next-line import/extensions
 import Vue from 'vue'
+// eslint-disable-next-line import/extensions
 import Router from 'vue-router'
 
 /* Layout */

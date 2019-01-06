@@ -1,4 +1,6 @@
+// eslint-disable-next-line import/extensions
 import Vue from 'vue'
+// eslint-disable-next-line import/extensions
 import Vuex from 'vuex'
 import app from './modules/app'
 import user from './modules/user'

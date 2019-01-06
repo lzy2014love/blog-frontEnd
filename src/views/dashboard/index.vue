@@ -14,6 +14,7 @@
 </template>
 
 <script>
+// eslint-disable-next-line import/extensions
 import { mapGetters } from 'vuex'
 
 export default {

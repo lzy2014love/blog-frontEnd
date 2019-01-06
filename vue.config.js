@@ -1,3 +1,4 @@
+/* eslint-disable quote-props */
 /* eslint-disable no-console */
 const path = require('path')
 const TerserPlugin = require('terser-webpack-plugin') // 支持压缩es6
@@ -56,22 +57,16 @@ module.exports = {
       config = {
         optimization: {
           runtimeChunk: 'single',
-          splitChunks: {
-            chunks: 'all',
-            cacheGroups: {
-              libs: {
-                name: 'chunk-libs',
-                test: /[\\/]node_modules[\\/]/,
-                priority: 10,
-                chunks: 'initial', // 只打包初始时依赖的第三方
-              },
-              elementUI: {
-                name: 'chunk-elementUI', // 单独将 elementUI 拆包
-                priority: 20, // 权重要大于 libs 和 app 不然会被打包进 libs 或者 app
-                test: /[\\/]node_modules[\\/]element-ui[\\/]/,
-              },
-            },
-          },
+          // splitChunks: {
+          //   chunks: 'all',
+          //   cacheGroups: {
+          //     libs: {
+          //       name: 'pathToRegexp',
+          //       priority: 20,
+          //       test: /[\\/]node_modules[\\/]path-to-regexp[\\/]/,
+          //     },
+          //   },
+          // },
           minimizer: [
             new TerserPlugin({
               parallel: true, // 并行压缩
@@ -120,7 +115,17 @@ module.exports = {
       config = {}
     }
     // 开发生产共同配置
-    Object.assign(config, {})
+    Object.assign(config, {
+      externals: {
+        'vue': 'Vue',
+        'vue-router': 'VueRouter',
+        'vuex': 'Vuex',
+        'element-ui': 'ELEMENT',
+        'axios': 'axios',
+        'js-cookie': 'Cookies',
+        'nprogress': 'NProgress ',
+      },
+    })
     return config
   },
   chainWebpack: config => {

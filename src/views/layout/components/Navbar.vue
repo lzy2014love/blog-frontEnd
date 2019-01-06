@@ -35,6 +35,7 @@
 </template>
 
 <script>
+// eslint-disable-next-line import/extensions
 import { mapGetters } from 'vuex'
 import Breadcrumb from '@/components/Breadcrumb/index.vue'
 import Hamburger from '@/components/Hamburger/index.vue'
