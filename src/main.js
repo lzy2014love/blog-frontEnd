@@ -16,10 +16,9 @@ Vue.use(ElementUI)
 // 生产环境关闭devtool
 if (process.env.NODE_ENV === 'production') {
   Vue.config.productionTip = false
+} else {
+  Vue.config.productionTip = true
 }
-console.log('====================================')
-console.log(process.env.NODE_ENV)
-console.log('====================================')
 // eslint-disable-next-line no-new
 new Vue({
   el: '#app',

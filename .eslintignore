@@ -4,3 +4,4 @@
 /public/
 node_modules/**
 .vscode/**
+output.js

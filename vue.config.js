@@ -14,7 +14,7 @@ function resolve(dir) {
 const url = 'http://localhost:7001'
 
 console.log('====================================')
-console.log(process.env.NODE_ENV, process.argv)
+console.log(process.argv)
 console.log('====================================')
 module.exports = {
   baseUrl: '/',
@@ -48,7 +48,7 @@ module.exports = {
   },
   // 如果机器有超过1个核心，则默认情况下启用生产构建中的babel和TS的线程加载器
   parallel: require('os').cpus().length > 1,
-  // lintOnSave: 'error', // eslint报错停止编译
+  lintOnSave: isProduction ? 'error' : true, // eslint报错停止编译
   productionSourceMap: !isProduction, // 生产环境是否生成 sourceMap 文件
   configureWebpack: () => {
     let config
@@ -57,16 +57,16 @@ module.exports = {
       config = {
         optimization: {
           runtimeChunk: 'single',
-          // splitChunks: {
-          //   chunks: 'all',
-          //   cacheGroups: {
-          //     libs: {
-          //       name: 'pathToRegexp',
-          //       priority: 20,
-          //       test: /[\\/]node_modules[\\/]path-to-regexp[\\/]/,
-          //     },
-          //   },
-          // },
+          splitChunks: {
+            chunks: 'all',
+            cacheGroups: {
+              libs: {
+                name: 'libs',
+                priority: 10,
+                test: /[\\/]node_modules[\\/]/,
+              },
+            },
+          },
           minimizer: [
             new TerserPlugin({
               parallel: true, // 并行压缩
@@ -108,7 +108,7 @@ module.exports = {
             deleteOriginalAssets: true, // 是否删除原始文件。
           }),
         ],
-        devtool: false,
+        devtool: isProduction ? false : 'cheap-source-map',
       }
     } else {
       // 开发环境配置

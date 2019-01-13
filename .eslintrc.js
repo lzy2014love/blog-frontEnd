@@ -48,6 +48,8 @@ module.exports = {
       { ignore: ['vue', 'vue-router', 'vuex', 'element-ui', 'axios', 'js-cookie', 'nprogress'] },
     ],
     'linebreak-style': ['error', 'unix'],
+    'max-len': ['error', 120],
+    'no-restricted-syntax': ['error', 'WithStatement', "BinaryExpression[operator='in']"],
     semi: ['error', 'never'],
   },
   parserOptions: {

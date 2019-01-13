@@ -1,27 +1,59 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
-    <link rel="stylesheet" href="https://cdn.staticfile.org/normalize/8.0.1/normalize.min.css" />
-    <link rel="stylesheet" href="https://cdn.staticfile.org/element-ui/2.4.11/theme-chalk/index.css" />
-    <link rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <link rel="dns-prefetch" href="//cdn.staticfile.org" />
+    <link rel="icon" href="<%= BASE_URL %>favicon.ico" />
+    <link href="//cdn.staticfile.org/normalize/8.0.1/normalize.min.css" rel="preload" as="style" />
+    <link href="//cdn.staticfile.org/element-ui/2.4.11/theme-chalk/index.css" rel="preload" as="style" />
+    <link href="//cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" rel="preload" as="style" />
+    <% if(NODE_ENV === 'production'){ %>
+    <link crossorigin="anonymous" href="//cdn.staticfile.org/vue/2.5.21/vue.runtime.min.js" rel="preload" as="script" />
+    <% } else { %>
+    <link crossorigin="anonymous" href="//cdn.staticfile.org/vue/2.5.21/vue.runtime.js" rel="preload" as="script" />
+    <% } %>
+    <link
+      crossorigin="anonymous"
+      href="//cdn.staticfile.org/vue-router/3.0.2/vue-router.min.js"
+      rel="preload"
+      as="script"
+    />
+    <link crossorigin="anonymous" href="//cdn.staticfile.org/vuex/3.0.1/vuex.min.js" rel="preload" as="script" />
+    <link crossorigin="anonymous" href="//cdn.staticfile.org/axios/0.18.0/axios.min.js" rel="preload" as="script" />
+    <link crossorigin="anonymous" href="//cdn.staticfile.org/element-ui/2.4.11/index.js" rel="preload" as="script" />
+    <link
+      crossorigin="anonymous"
+      href="//cdn.staticfile.org/js-cookie/2.2.0/js.cookie.min.js"
+      rel="preload"
+      as="script"
+    />
+    <link
+      crossorigin="anonymous"
+      href="//cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js"
+      rel="preload"
+      as="script"
+    />
+    <link rel="stylesheet" href="//cdn.staticfile.org/normalize/8.0.1/normalize.min.css" />
+    <link rel="stylesheet" href="//cdn.staticfile.org/element-ui/2.4.11/theme-chalk/index.css" />
+    <link rel="stylesheet" href="//cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
     <title>博客后台管理</title>
   </head>
   <body>
-    <noscript>
-      <strong>很抱歉，如果没有启用JavaScript，本网站将无法正常运行。请启用它。</strong>
-    </noscript>
+    <noscript> <strong>很抱歉，如果没有启用JavaScript，本网站将无法正常运行。请启用它。</strong> </noscript>
     <div id="app"></div>
-    <script src="https://cdn.staticfile.org/vue/2.5.21/vue.min.js"></script>
-    <script src="https://cdn.staticfile.org/vue-router/3.0.2/vue-router.min.js"></script>
-    <script src="https://cdn.staticfile.org/vuex/3.0.1/vuex.min.js"></script>
-    <script src="https://cdn.staticfile.org/axios/0.18.0/axios.min.js"></script>
-    <script src="https://cdn.staticfile.org/element-ui/2.4.11/index.js"></script>
-    <script src="https://cdn.staticfile.org/js-cookie/2.2.0/js.cookie.min.js"></script>
-    <script src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js"></script>
+    <% if(NODE_ENV === 'production'){ %>
+    <script crossorigin="anonymous" src="//cdn.staticfile.org/vue/2.5.21/vue.runtime.min.js"></script>
+    <% } else { %>
+    <script crossorigin="anonymous" src="//cdn.staticfile.org/vue/2.5.21/vue.runtime.js"></script>
+    <% } %>
+    <script crossorigin="anonymous" src="//cdn.staticfile.org/vue-router/3.0.2/vue-router.min.js"></script>
+    <script crossorigin="anonymous" src="//cdn.staticfile.org/element-ui/2.4.11/index.js"></script>
+    <script crossorigin="anonymous" src="//cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js"></script>
+    <script crossorigin="anonymous" src="//cdn.staticfile.org/vuex/3.0.1/vuex.min.js"></script>
+    <script crossorigin="anonymous" src="//cdn.staticfile.org/axios/0.18.0/axios.min.js"></script>
+    <script crossorigin="anonymous" src="//cdn.staticfile.org/js-cookie/2.2.0/js.cookie.min.js"></script>
     <!-- built files will be auto injected -->
   </body>
 </html>
