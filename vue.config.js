@@ -59,11 +59,22 @@ module.exports = {
           runtimeChunk: 'single',
           splitChunks: {
             chunks: 'all',
+            minSize: 25000, // 最小尺寸，30000
+            maxAsyncRequests: 6, // 最大异步请求数， 默认5
+            maxInitialRequests: 5, // 最大初始化请求书，默认3
+            automaticNameDelimiter: '-', // 打包分隔符
             cacheGroups: {
+              default: {
+                minChunks: 2,
+                priority: 1,
+                reuseExistingChunk: true, // 默认使用已有的模块
+              },
               libs: {
                 name: 'libs',
                 priority: 10,
                 test: /[\\/]node_modules[\\/]/,
+                chunks: 'initial',
+                reuseExistingChunk: true,
               },
             },
           },
@@ -94,6 +105,9 @@ module.exports = {
             new OptimizeCSSAssetsPlugin({
               cssProcessorOptions: {
                 safe: true,
+                discardComments: {
+                  removeAll: true,
+                },
               },
             }),
           ],
@@ -145,5 +159,17 @@ module.exports = {
       .options({
         symbolId: 'icon-[name]',
       })
+
+    const oneOfsMap = config.module.rule('scss').oneOfs.store
+    oneOfsMap.forEach(item => {
+      item
+        .use('sass-resources-loader')
+        .loader('sass-resources-loader')
+        .options({
+          // 自动import到每个style标签的scss文件
+          resources: [path.resolve(__dirname, './src/styles/variables.scss')],
+        })
+        .end()
+    })
   },
 }
